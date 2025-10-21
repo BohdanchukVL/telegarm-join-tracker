@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@tgjoin/core": ["packages/core/index.ts"],
+      "@tgjoin/storage/*": ["packages/storage/*"]
+    }
+  }
+}

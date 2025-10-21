@@ -1,0 +1,44 @@
+mode: single-bot
+group_id: ${TG_GROUP_ID}
+
+bots:
+  a:
+    token: ${BOT_A_TOKEN}
+    webhook_path: /tg-a/webhook
+    secret: ${A_SECRET} # used for X-Telegram-Bot-Api-Secret-Token
+
+  # used only in dual-bot mode
+  b:
+    token: ${BOT_B_TOKEN}
+    webhook_path: /tg-b/webhook
+    secret: ${B_SECRET}
+    username: ${BOT_B_USERNAME} # used to craft deep-link t.me/<username>?start=...
+
+join:
+  mode: limit1 # limit1 | join_request
+  expire_seconds: 86400
+  member_limit: 1 # ignored if join_request=true
+
+redirect:
+  path: /tg-join
+  # which query params are allowed to go into "meta"
+  allow_params: [clickid, utm_source, utm_medium, utm_campaign, ad, adset]
+
+storage:
+  driver: memory # memory | sqlite | postgres
+  dsn: "" # sqlite: file:local.db | pg: postgres://user:pass@host/db
+
+postback:
+  http:
+    url: ${POSTBACK_URL} # if empty => no postbacks
+    method: ${POSTBACK_METHOD} # GET | POST (default: GET)
+    mode: ${POSTBACK_MODE} # query | json (default: GET->query, POST->json)
+    headers: ${POSTBACK_HEADERS_JSON} # JSON string, e.g. {"X-Auth":"token"}
+
+security:
+  require_secret_header: true
+  # optionally allowlist Telegram IPs (CIDR strings)
+  webhook_ip_allowlist: []
+
+logging:
+  level: info

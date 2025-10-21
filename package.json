@@ -1,0 +1,14 @@
+{
+  "name": "tg-join-attribution",
+  "private": true,
+  "scripts": {
+    "dev": "bun run --watch --env-file=.env apps/server/src/server.ts"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "yaml": "^2.8.1"
+  }
+}
